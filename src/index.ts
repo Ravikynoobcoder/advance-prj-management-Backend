@@ -51,18 +51,24 @@ app.use(
   })
 );
 
-app.get(
-  `/`,
-  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    throw new BadRequestException(
-      "This is a bad request",
-      ErrorCodeEnum.AUTH_INVALID_TOKEN
-    );
-    return res.status(HTTPSTATUS.OK).json({
-      message: "Hello Subscribe to the channel & share",
-    });
-  })
-);
+// this app.get route is comment but this was original 
+
+// app.get(
+//   `/`,
+//   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+//     throw new BadRequestException(
+//       "This is a bad request",
+//       ErrorCodeEnum.AUTH_INVALID_TOKEN
+//     );
+//     return res.status(HTTPSTATUS.OK).json({
+//       message: "Hello Subscribe to the channel & share",
+//     });
+//   })
+// );
+
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).send("API is running 🚀");
+});
 
 app.use(`${BASE_PATH}/auth`, authRoutes);
 app.use(`${BASE_PATH}/user`, isAuthenticated, userRoutes);
